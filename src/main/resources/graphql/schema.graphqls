@@ -1,0 +1,47 @@
+# Object Types
+type Query {
+    allUsers: [UserPerson!]!
+    findOneUserById(id: ID) : UserPerson
+    allUserPersonPaged(page: Int, size: Int) : [Ticket]
+
+    allTickets: [Ticket]
+    findOneTicketById(id: ID) : Ticket
+    allTicketPaged(page: Int, size: Int) : [Ticket]
+}
+
+type Mutation {
+    createUser(firstName: String!, lastName: String!) : UserPerson!
+    updateUser(id: ID, firstName: String!, lastName: String!) : UserPerson!
+    deleteUser(id: ID) : UserPerson
+
+    createTicket(user_id: ID, status: Estado) : Ticket
+    updateTicket(id: ID, user_id: ID, status: Estado) : Ticket
+    deleteTicket(id: ID) : Ticket
+}
+
+type Status {
+    status: String
+    estado: String
+}
+
+type UserPerson {
+    id: ID
+    firstName: String
+    lastName: String
+    tickets: [Ticket]
+    status: Boolean
+}
+
+type Ticket{
+    id: ID!
+    userPerson: UserPerson
+    createdDate: String
+    updatedDate: String
+    status: Status
+}
+
+enum Estado {
+    FALSE,
+    TRUE
+}
+
